@@ -183,7 +183,7 @@ export default function AutoLoanCalculator() {
                     Used Vehicle
                   </button>
                 </div>
-                <p id="vehicle-type-help" className="sr-only">Select whether you're financing a new or used vehicle</p>
+                <p id="vehicle-type-help" className="sr-only">Select whether you&apos;re financing a new or used vehicle</p>
               </fieldset>
 
               {/* Vehicle Price */}
@@ -264,7 +264,7 @@ export default function AutoLoanCalculator() {
                   />
                 </div>
                 <p id="trade-in-help" className="mt-1 text-xs text-gray-500">
-                  Use KBB, Edmunds, or your dealer's appraisal for accurate values
+                  Use KBB, Edmunds, or your dealer&apos;s appraisal for accurate values
                 </p>
               </div>
 
@@ -423,7 +423,7 @@ export default function AutoLoanCalculator() {
             </div>
             <div>
               <h4 className="font-medium text-gray-800 mb-2">New vs Used Rates</h4>
-              <p>New vehicle loans typically offer lower interest rates as they're considered less risky by lenders.</p>
+              <p>New vehicle loans typically offer lower interest rates as they&apos;re considered less risky by lenders.</p>
             </div>
           </div>
         </section>

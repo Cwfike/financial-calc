@@ -323,4 +323,12 @@ export default function MortgageCalculator() {
               <p>Larger down payments reduce your loan amount and may help you avoid private mortgage insurance (PMI).</p>
             </div>
             <div>
-              <h4 className="font-medium text-gray-800 mb-2">
+              <h4 className="font-medium text-gray-800 mb-2">Loan Term Trade-offs</h4>
+              <p>Shorter terms mean higher monthly payments but significantly less total interest paid and better rates.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  )
+}
