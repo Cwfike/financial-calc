@@ -114,6 +114,13 @@ export default function HomePage() {
                 >
                   Auto Loan Calculator
                 </Link>
+                <Link 
+                  href="/blog" 
+                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                  aria-label="Read financial tips and guides"
+                >
+                  Blog
+                </Link>
               </nav>
             </div>
           </div>
