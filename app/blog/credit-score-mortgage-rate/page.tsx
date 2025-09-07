@@ -58,7 +58,7 @@ export default function CreditScoreMortgageRatePost() {
           {/* Article Content */}
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-gray-700 mb-6">
-              When you're shopping for a mortgage, one number can make the difference between saving thousands or paying tens of thousands more over the life of your loan: your credit score. Understanding how credit scores affect mortgage rates can help you make informed decisions and potentially save significant money on your home purchase.
+              When you&apos;re shopping for a mortgage, one number can make the difference between saving thousands or paying tens of thousands more over the life of your loan: your credit score. Understanding how credit scores affect mortgage rates can help you make informed decisions and potentially save significant money on your home purchase.
             </p>
 
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">
