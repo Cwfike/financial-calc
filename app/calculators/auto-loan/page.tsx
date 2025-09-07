@@ -11,8 +11,42 @@ import {
   calculateMonthlyPayment,
   calculateTotalInterest 
 } from '@/lib/rates'
+import { useRates } from '@/lib/hooks/useRates'
+
+// Helper function to convert live rates to auto loan rates
+function convertLiveRatesToAutoRates(
+  liveRates: { primeRate: number; mortgage30: number; mortgage15: number }, 
+  creditScore: number, 
+  term: number, 
+  vehicleType: 'new' | 'used'
+) {
+  const { primeRate } = liveRates
+  
+  // Credit score spreads
+  let creditSpread = 0
+  if (creditScore >= 781) creditSpread = 0.5
+  else if (creditScore >= 661) creditSpread = 2.0
+  else if (creditScore >= 601) creditSpread = 4.0
+  else if (creditScore >= 501) creditSpread = 8.0
+  else creditSpread = 12.0
+  
+  // Term spread (longer terms = higher rates)
+  const termSpread = term > 5 ? 1.0 : 0
+  
+  // Vehicle type spread
+  const newCarRate = primeRate + creditSpread + termSpread
+  const usedCarRate = newCarRate + 1.5 // Used cars typically +1.5% higher
+  
+  return {
+    autoNewRate: Math.max(newCarRate, 3.0), // Minimum 3% rate
+    autoUsedRate: Math.max(usedCarRate, 4.5) // Minimum 4.5% rate
+  }
+}
 
 export default function AutoLoanCalculator() {
+  // Live rates hook
+  const { rates: liveRates, loading: ratesLoading, error: ratesError } = useRates()
+  
   const [vehiclePrice, setVehiclePrice] = useState<string>('35,000')
   const [downPayment, setDownPayment] = useState<string>('7,000')
   const [tradeInValue, setTradeInValue] = useState<string>('0')
@@ -62,7 +96,14 @@ export default function AutoLoanCalculator() {
     const score = parseInt(creditScore) || 704
 
     const loanAmount = price - down - tradeIn
-    const rates = getCurrentRates(score, term, vehicleType as 'new' | 'used')  // Pass term and vehicle type
+    
+    // Use live rates when available, fallback to static rates
+    let rates
+    if (liveRates) {
+      rates = convertLiveRatesToAutoRates(liveRates, score, term, vehicleType as 'new' | 'used')
+    } else {
+      rates = getCurrentRates(score, term, vehicleType as 'new' | 'used')
+    }
     
     // Use appropriate rate based on vehicle type
     const interestRate = vehicleType === 'new' ? rates.autoNewRate : rates.autoUsedRate
@@ -80,7 +121,7 @@ export default function AutoLoanCalculator() {
 
   useEffect(() => {
     calculateResults()
-  }, [vehiclePrice, downPayment, tradeInValue, loanTerm, creditScore, vehicleType])
+  }, [vehiclePrice, downPayment, tradeInValue, loanTerm, creditScore, vehicleType, liveRates])
 
   const creditRange = getCreditRangeInfo(parseInt(creditScore))
   const downPaymentPercent = ((parseFormattedNumber(downPayment) / parseFormattedNumber(vehiclePrice)) * 100).toFixed(1)
@@ -322,86 +363,103 @@ export default function AutoLoanCalculator() {
 
           {/* Results */}
           <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Monthly Payment</h2>
-            
-            {/* Main Payment Display */}
-            <div className="text-center mb-8">
-              <div className="text-5xl font-bold text-green-600 mb-2" aria-label={`Monthly payment of $${results.monthlyPayment.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}>
-                ${results.monthlyPayment.toLocaleString('en-US', { 
-                  minimumFractionDigits: 0, 
-                  maximumFractionDigits: 0 
-                })}
+            {ratesLoading ? (
+              <div className="text-center py-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading current rates...</p>
               </div>
-              <p className="text-gray-600">per month</p>
-            </div>
-
-            {/* Breakdown */}
-            <dl className="space-y-4">
-              <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                <dt className="text-gray-700">Interest Rate ({vehicleType} vehicle)</dt>
-                <dd className="font-semibold text-lg">{results.interestRate.toFixed(2)}%</dd>
-              </div>
-              
-              <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                <dt className="text-gray-700">Loan Amount</dt>
-                <dd className="font-semibold">
-                  ${results.loanAmount.toLocaleString('en-US', { 
-                    minimumFractionDigits: 0, 
-                    maximumFractionDigits: 0 
-                  })}
-                </dd>
-              </div>
-              
-              {totalDownPayment > 0 && (
-                <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                  <dt className="text-gray-700">Total Down Payment</dt>
-                  <dd className="font-semibold text-green-600">
-                    ${totalDownPayment.toLocaleString('en-US', { 
+            ) : (
+              <>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Monthly Payment</h2>
+                
+                {/* Main Payment Display */}
+                <div className="text-center mb-8">
+                  <div className="text-5xl font-bold text-green-600 mb-2" aria-label={`Monthly payment of $${results.monthlyPayment.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}>
+                    ${results.monthlyPayment.toLocaleString('en-US', { 
                       minimumFractionDigits: 0, 
                       maximumFractionDigits: 0 
                     })}
-                  </dd>
+                  </div>
+                  <p className="text-gray-600">per month</p>
                 </div>
-              )}
-              
-              <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                <dt className="text-gray-700">Total Interest</dt>
-                <dd className="font-semibold text-red-600">
-                  ${results.totalInterest.toLocaleString('en-US', { 
-                    minimumFractionDigits: 0, 
-                    maximumFractionDigits: 0 
-                  })}
-                </dd>
-              </div>
-              
-              <div className="flex justify-between items-center py-3">
-                <dt className="text-gray-700 font-medium">Total Payment</dt>
-                <dd className="font-bold text-lg">
-                  ${(results.loanAmount + results.totalInterest).toLocaleString('en-US', { 
-                    minimumFractionDigits: 0, 
-                    maximumFractionDigits: 0 
-                  })}
-                </dd>
-              </div>
-            </dl>
 
-            {/* Credit Impact Notice */}
-            <div className="mt-8 p-4 bg-green-50 rounded-lg">
-              <h4 className="font-medium text-green-800 mb-2">💡 Improve Your Rate</h4>
-              <p className="text-sm text-green-700">
-                Improving your credit score could save you thousands in interest. 
-                Consider paying down existing debt before applying.
-              </p>
-            </div>
+                {/* Breakdown */}
+                <dl className="space-y-4">
+                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                    <dt className="text-gray-700">Interest Rate ({vehicleType} vehicle)</dt>
+                    <dd className="font-semibold text-lg">{results.interestRate.toFixed(2)}%</dd>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                    <dt className="text-gray-700">Loan Amount</dt>
+                    <dd className="font-semibold">
+                      ${results.loanAmount.toLocaleString('en-US', { 
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                      })}
+                    </dd>
+                  </div>
+                  
+                  {totalDownPayment > 0 && (
+                    <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                      <dt className="text-gray-700">Total Down Payment</dt>
+                      <dd className="font-semibold text-green-600">
+                        ${totalDownPayment.toLocaleString('en-US', { 
+                          minimumFractionDigits: 0, 
+                          maximumFractionDigits: 0 
+                        })}
+                      </dd>
+                    </div>
+                  )}
+                  
+                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                    <dt className="text-gray-700">Total Interest</dt>
+                    <dd className="font-semibold text-red-600">
+                      ${results.totalInterest.toLocaleString('en-US', { 
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                      })}
+                    </dd>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-3">
+                    <dt className="text-gray-700 font-medium">Total Payment</dt>
+                    <dd className="font-bold text-lg">
+                      ${(results.loanAmount + results.totalInterest).toLocaleString('en-US', { 
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                      })}
+                    </dd>
+                  </div>
+                </dl>
 
-            {/* Vehicle Type Notice */}
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-medium text-blue-800 mb-2">🚗 New vs Used</h4>
-              <p className="text-sm text-blue-700">
-                New vehicles typically offer lower interest rates but higher prices. 
-                Used vehicles have higher rates but better value.
-              </p>
-            </div>
+                {/* Rate Source Indicator */}
+                <div className="mt-6 p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-600">
+                    {liveRates ? '✅ Using current market rates' : '⚠️ Using estimated rates'}
+                    {ratesError && ` (${ratesError})`}
+                  </p>
+                </div>
+
+                {/* Credit Impact Notice */}
+                <div className="mt-6 p-4 bg-green-50 rounded-lg">
+                  <h4 className="font-medium text-green-800 mb-2">💡 Improve Your Rate</h4>
+                  <p className="text-sm text-green-700">
+                    Improving your credit score could save you thousands in interest. 
+                    Consider paying down existing debt before applying.
+                  </p>
+                </div>
+
+                {/* Vehicle Type Notice */}
+                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                  <h4 className="font-medium text-blue-800 mb-2">🚗 New vs Used</h4>
+                  <p className="text-sm text-blue-700">
+                    New vehicles typically offer lower interest rates but higher prices. 
+                    Used vehicles have higher rates but better value.
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
 

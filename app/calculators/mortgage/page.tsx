@@ -11,8 +11,46 @@ import {
   calculateMonthlyPayment,
   calculateTotalInterest 
 } from '@/lib/rates'
+import { useRates } from '@/lib/hooks/useRates'
+
+// Helper function to convert live rates to mortgage rates
+function convertLiveRatesToMortgageRates(
+  liveRates: { primeRate: number; mortgage30: number; mortgage15: number }, 
+  creditScore: number, 
+  term: number
+) {
+  const { mortgage30, mortgage15 } = liveRates
+  
+  // Credit score spreads for mortgages
+  let creditSpread = 0
+  if (creditScore >= 781) creditSpread = 0.0      // Excellent credit gets base rate
+  else if (creditScore >= 661) creditSpread = 0.3  // Good credit
+  else if (creditScore >= 601) creditSpread = 0.8  // Fair credit
+  else if (creditScore >= 501) creditSpread = 1.5  // Poor credit
+  else creditSpread = 2.5                          // Very poor credit
+  
+  // Use appropriate base rate based on term
+  let baseRate = mortgage30
+  if (term <= 15) {
+    baseRate = mortgage15
+  } else if (term <= 20) {
+    // Interpolate between 15 and 30 year rates
+    baseRate = mortgage15 + ((mortgage30 - mortgage15) * 0.3)
+  } else if (term <= 25) {
+    baseRate = mortgage15 + ((mortgage30 - mortgage15) * 0.7)
+  }
+  
+  const mortgageRate = baseRate + creditSpread
+  
+  return {
+    mortgageRate: Math.max(mortgageRate, 3.0) // Minimum 3% rate
+  }
+}
 
 export default function MortgageCalculator() {
+  // Live rates hook
+  const { rates: liveRates, loading: ratesLoading, error: ratesError } = useRates()
+  
   const [homePrice, setHomePrice] = useState<string>('400,000')
   const [downPayment, setDownPayment] = useState<string>('80,000')
   const [loanTerm, setLoanTerm] = useState<string>('30')
@@ -54,7 +92,15 @@ export default function MortgageCalculator() {
     const score = parseInt(creditScore) || 704
 
     const loanAmount = price - down
-    const rates = getCurrentRates(score, term)  // Pass term to get term-adjusted rate
+    
+    // Use live rates when available, fallback to static rates
+    let rates
+    if (liveRates) {
+      rates = convertLiveRatesToMortgageRates(liveRates, score, term)
+    } else {
+      rates = getCurrentRates(score, term)
+    }
+    
     const monthlyPayment = calculateMonthlyPayment(loanAmount, rates.mortgageRate, term)
     const totalInterest = calculateTotalInterest(monthlyPayment, term, loanAmount)
 
@@ -68,7 +114,7 @@ export default function MortgageCalculator() {
 
   useEffect(() => {
     calculateResults()
-  }, [homePrice, downPayment, loanTerm, creditScore])
+  }, [homePrice, downPayment, loanTerm, creditScore, liveRates])
 
   const creditRange = getCreditRangeInfo(parseInt(creditScore))
   const downPaymentPercent = ((parseFormattedNumber(downPayment) / parseFormattedNumber(homePrice)) * 100).toFixed(1)
@@ -235,74 +281,101 @@ export default function MortgageCalculator() {
 
           {/* Results */}
           <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Monthly Payment</h2>
-            
-            {/* Main Payment Display */}
-            <div className="text-center mb-8">
-              <div className="text-5xl font-bold text-blue-600 mb-2" aria-label={`Monthly payment of $${results.monthlyPayment.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}>
-                ${results.monthlyPayment.toLocaleString('en-US', { 
-                  minimumFractionDigits: 0, 
-                  maximumFractionDigits: 0 
-                })}
+            {ratesLoading ? (
+              <div className="text-center py-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                <p className="text-gray-600">Loading current rates...</p>
               </div>
-              <p className="text-gray-600">per month</p>
-            </div>
+            ) : (
+              <>
+                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Monthly Payment</h2>
+                
+                {/* Main Payment Display */}
+                <div className="text-center mb-8">
+                  <div className="text-5xl font-bold text-blue-600 mb-2" aria-label={`Monthly payment of $${results.monthlyPayment.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`}>
+                    ${results.monthlyPayment.toLocaleString('en-US', { 
+                      minimumFractionDigits: 0, 
+                      maximumFractionDigits: 0 
+                    })}
+                  </div>
+                  <p className="text-gray-600">per month</p>
+                </div>
 
-            {/* Breakdown */}
-            <dl className="space-y-4">
-              <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                <dt className="text-gray-700">Interest Rate</dt>
-                <dd className="font-semibold text-lg">{results.interestRate.toFixed(2)}%</dd>
-              </div>
-              
-              <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                <dt className="text-gray-700">Loan Amount</dt>
-                <dd className="font-semibold">
-                  ${results.loanAmount.toLocaleString('en-US', { 
-                    minimumFractionDigits: 0, 
-                    maximumFractionDigits: 0 
-                  })}
-                </dd>
-              </div>
-              
-              <div className="flex justify-between items-center py-3 border-b border-gray-200">
-                <dt className="text-gray-700">Total Interest</dt>
-                <dd className="font-semibold text-red-600">
-                  ${results.totalInterest.toLocaleString('en-US', { 
-                    minimumFractionDigits: 0, 
-                    maximumFractionDigits: 0 
-                  })}
-                </dd>
-              </div>
-              
-              <div className="flex justify-between items-center py-3">
-                <dt className="text-gray-700 font-medium">Total Payment</dt>
-                <dd className="font-bold text-lg">
-                  ${(results.loanAmount + results.totalInterest).toLocaleString('en-US', { 
-                    minimumFractionDigits: 0, 
-                    maximumFractionDigits: 0 
-                  })}
-                </dd>
-              </div>
-            </dl>
+                {/* Breakdown */}
+                <dl className="space-y-4">
+                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                    <dt className="text-gray-700">Interest Rate ({loanTerm}-year)</dt>
+                    <dd className="font-semibold text-lg">{results.interestRate.toFixed(2)}%</dd>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                    <dt className="text-gray-700">Loan Amount</dt>
+                    <dd className="font-semibold">
+                      ${results.loanAmount.toLocaleString('en-US', { 
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                      })}
+                    </dd>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                    <dt className="text-gray-700">Down Payment ({downPaymentPercent}%)</dt>
+                    <dd className="font-semibold text-green-600">
+                      ${parseFormattedNumber(downPayment).toLocaleString('en-US', { 
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                      })}
+                    </dd>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                    <dt className="text-gray-700">Total Interest</dt>
+                    <dd className="font-semibold text-red-600">
+                      ${results.totalInterest.toLocaleString('en-US', { 
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                      })}
+                    </dd>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-3">
+                    <dt className="text-gray-700 font-medium">Total Payment</dt>
+                    <dd className="font-bold text-lg">
+                      ${(results.loanAmount + results.totalInterest).toLocaleString('en-US', { 
+                        minimumFractionDigits: 0, 
+                        maximumFractionDigits: 0 
+                      })}
+                    </dd>
+                  </div>
+                </dl>
 
-            {/* Credit Impact Notice */}
-            <div className="mt-8 p-4 bg-green-50 rounded-lg">
-              <h4 className="font-medium text-green-800 mb-2">💡 Improve Your Rate</h4>
-              <p className="text-sm text-green-700">
-                Improving your credit score could save you thousands in interest. 
-                Each tier up typically reduces your rate by 0.3-0.8%.
-              </p>
-            </div>
+                {/* Rate Source Indicator */}
+                <div className="mt-6 p-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-600">
+                    {liveRates ? '✅ Using current market rates' : '⚠️ Using estimated rates'}
+                    {ratesError && ` (${ratesError})`}
+                  </p>
+                </div>
 
-            {/* Term Benefit Notice */}
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-medium text-blue-800 mb-2">⏰ Shorter Terms Save More</h4>
-              <p className="text-sm text-blue-700">
-                15-year loans have lower rates and save massive amounts in total interest, 
-                but require higher monthly payments.
-              </p>
-            </div>
+                {/* Credit Impact Notice */}
+                <div className="mt-6 p-4 bg-green-50 rounded-lg">
+                  <h4 className="font-medium text-green-800 mb-2">💡 Improve Your Rate</h4>
+                  <p className="text-sm text-green-700">
+                    Improving your credit score could save you thousands in interest. 
+                    Each tier up typically reduces your rate by 0.3-0.8%.
+                  </p>
+                </div>
+
+                {/* Term Benefit Notice */}
+                <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                  <h4 className="font-medium text-blue-800 mb-2">⏰ Shorter Terms Save More</h4>
+                  <p className="text-sm text-blue-700">
+                    15-year loans have lower rates and save massive amounts in total interest, 
+                    but require higher monthly payments.
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
