@@ -68,13 +68,13 @@ export default function CreditScoreMortgageRatePost() {
               Your credit score serves as a snapshot of your creditworthiness to lenders. Mortgage companies use this three-digit number (typically ranging from 300 to 850) to assess the risk of lending to you. The logic is straightforward: borrowers with higher credit scores have historically been more likely to repay their loans on time, while those with lower scores present higher risk.
             </p>
             <p className="mb-6">
-              This risk assessment directly translates to the interest rate you'll receive. Lower-risk borrowers (those with higher credit scores) qualify for better rates, while higher-risk borrowers pay premium rates to compensate lenders for the increased risk.
+              This risk assessment directly translates to the interest rate you&apos;ll receive. Lower-risk borrowers (those with higher credit scores) qualify for better rates, while higher-risk borrowers pay premium rates to compensate lenders for the increased risk.
             </p>
 
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">
               Current Credit Score Brackets and Typical Rates
             </h2>
-            <p className="mb-4">As of late 2024, here's how credit scores typically translate to mortgage interest rates:</p>
+            <p className="mb-4">As of late 2024, here&apos;s how credit scores typically translate to mortgage interest rates:</p>
             
             <div className="bg-blue-50 p-6 rounded-lg mb-6">
               <div className="space-y-4">
@@ -129,7 +129,7 @@ export default function CreditScoreMortgageRatePost() {
               The Real Cost Impact
             </h2>
             <p className="mb-4">
-              The difference between credit score brackets isn't just a few tenths of a percentage point—it can mean massive differences in what you pay over time.
+              The difference between credit score brackets isn&apos;t just a few tenths of a percentage point—it can mean massive differences in what you pay over time.
             </p>
             
             <div className="bg-gray-50 p-6 rounded-lg mb-6">
@@ -166,7 +166,7 @@ export default function CreditScoreMortgageRatePost() {
             
             <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Credit History Length</h3>
             <p className="mb-4">
-              A longer credit history generally helps your case, even if your score isn't perfect. Lenders like to see established patterns of responsible credit use.
+              A longer credit history generally helps your case, even if your score isn&apos;t perfect. Lenders like to see established patterns of responsible credit use.
             </p>
 
             <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">Recent Credit Activity</h3>
@@ -187,17 +187,17 @@ export default function CreditScoreMortgageRatePost() {
             <h2 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">
               Strategies to Improve Your Credit Before Applying
             </h2>
-            <p className="mb-4">If your credit score isn't where you'd like it to be, consider these steps before applying for a mortgage:</p>
+            <p className="mb-4">If your credit score isn&apos;t where you&apos;d like it to be, consider these steps before applying for a mortgage:</p>
             
             <div className="space-y-4 mb-6">
               <div>
                 <h3 className="font-semibold text-gray-800">Pay Down Credit Card Balances</h3>
-                <p className="text-gray-700">Credit utilization (the percentage of available credit you're using) heavily impacts your score. Aim to use less than 30% of available credit, ideally under 10%.</p>
+                <p className="text-gray-700">Credit utilization (the percentage of available credit you&apos;re using) heavily impacts your score. Aim to use less than 30% of available credit, ideally under 10%.</p>
               </div>
               
               <div>
-                <h3 className="font-semibold text-gray-800">Don't Close Old Credit Cards</h3>
-                <p className="text-gray-700">Keep older accounts open to maintain credit history length. If there's an annual fee you don't want to pay, see if you can downgrade to a no-fee version.</p>
+                <h3 className="font-semibold text-gray-800">Don&apos;t Close Old Credit Cards</h3>
+                <p className="text-gray-700">Keep older accounts open to maintain credit history length. If there&apos;s an annual fee you don&apos;t want to pay, see if you can downgrade to a no-fee version.</p>
               </div>
               
               <div>
@@ -215,10 +215,10 @@ export default function CreditScoreMortgageRatePost() {
               The Bottom Line
             </h2>
             <p className="mb-4">
-              Your credit score significantly impacts your mortgage rate, which in turn affects both your monthly payment and the total amount you'll pay over the life of your loan. The difference between credit score tiers can mean hundreds of dollars per month and hundreds of thousands over time.
+              Your credit score significantly impacts your mortgage rate, which in turn affects both your monthly payment and the total amount you&apos;ll pay over the life of your loan. The difference between credit score tiers can mean hundreds of dollars per month and hundreds of thousands over time.
             </p>
             <p className="mb-6">
-              While you can't change your credit score overnight, understanding its impact can help you make informed decisions about when to apply for a mortgage and what terms to expect. Whether you decide to work on improving your credit first or proceed with your current score, knowing how lenders view your creditworthiness puts you in a stronger position to negotiate the best possible terms.
+              While you can&apos;t change your credit score overnight, understanding its impact can help you make informed decisions about when to apply for a mortgage and what terms to expect. Whether you decide to work on improving your credit first or proceed with your current score, knowing how lenders view your creditworthiness puts you in a stronger position to negotiate the best possible terms.
             </p>
 
             {/* Call-to-Action */}
