@@ -73,6 +73,8 @@ export const metadata: Metadata = {
   },
 }
 
+import { Analytics } from '@vercel/analytics/react'
+
 export default function RootLayout({
   children,
 }: {
@@ -88,7 +90,10 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#2563eb" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <Analytics />  {/* 👈 Insert here */}
+      </body>
     </html>
   )
 }
