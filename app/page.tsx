@@ -91,41 +91,6 @@ export default function HomePage() {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        {/* Header */}
-        <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-6">
-              <div className="flex items-center">
-                <Calculator className="h-8 w-8 text-blue-600" />
-                <h1 className="ml-2 text-2xl font-bold text-gray-900">Financial Calc</h1>
-              </div>
-              <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
-                <Link 
-                  href="/calculators/mortgage" 
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
-                  aria-label="Access mortgage payment calculator"
-                >
-                  Mortgage Calculator
-                </Link>
-                <Link 
-                  href="/calculators/auto-loan" 
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
-                  aria-label="Access auto loan payment calculator"
-                >
-                  Auto Loan Calculator
-                </Link>
-                <Link 
-                  href="/blog" 
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
-                  aria-label="Read financial tips and guides"
-                >
-                  Blog
-                </Link>
-              </nav>
-            </div>
-          </div>
-        </header>
-
         {/* Hero Section */}
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">

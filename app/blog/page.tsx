@@ -17,37 +17,6 @@ const posts = [
 export default function BlogIndex() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header with Navigation */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center text-blue-600 hover:text-blue-800 mr-4">
-                <ArrowLeft className="h-5 w-5 mr-1" />
-                Home
-              </Link>
-              <Calculator className="h-8 w-8 text-blue-600" />
-              <h1 className="ml-2 text-2xl font-bold text-gray-900">
-                Financial Calc Blog
-              </h1>
-            </div>
-            <nav className="hidden md:flex space-x-6">
-              <Link 
-                href="/calculators/mortgage" 
-                className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
-              >
-                Mortgage Calculator
-              </Link>
-              <Link 
-                href="/calculators/auto-loan" 
-                className="text-gray-700 hover:text-green-600 transition-colors font-medium"
-              >
-                Auto Loan Calculator
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
 
       {/* Calculator Cards - Featured Section */}
       <section className="bg-blue-50 py-12">

@@ -74,6 +74,8 @@ export const metadata: Metadata = {
 
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Navigation from './components/Navigation'
+import Breadcrumb from './components/Breadcrumb'
 
 export default function RootLayout({
   children,
@@ -109,6 +111,8 @@ export default function RootLayout({
           `}
         </Script>
         
+        <Navigation />
+        <Breadcrumb />
         {children}
         <Analytics />
         <SpeedInsights />
