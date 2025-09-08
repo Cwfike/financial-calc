@@ -1,0 +1,182 @@
+import Link from 'next/link'
+import { Calculator, Car, Home, TrendingUp } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Financial Calculators - Mortgage & Auto Loan Tools | Financial Calc',
+  description: 'Access all our free financial calculators in one place. Calculate mortgage payments, auto loans, and more with personalized rates based on your credit score.',
+  keywords: [
+    'financial calculators',
+    'mortgage calculator',
+    'auto loan calculator',
+    'loan calculators',
+    'credit score based rates',
+    'monthly payment calculator',
+    'loan comparison tools'
+  ],
+  openGraph: {
+    title: 'Financial Calculators - Mortgage & Auto Loan Tools',
+    description: 'Free financial calculators with personalized rates. Calculate mortgage payments, auto loans, and compare loan options.',
+    url: 'https://financial-calc.com/calculators',
+  },
+  alternates: {
+    canonical: 'https://financial-calc.com/calculators',
+  },
+}
+
+export default function CalculatorsPage() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Financial Calculators",
+    "description": "Collection of free financial calculators including mortgage and auto loan tools",
+    "url": "https://financial-calc.com/calculators",
+    "mainEntity": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Mortgage Calculator",
+        "description": "Calculate monthly mortgage payments with credit score-based interest rates",
+        "url": "https://financial-calc.com/calculators/mortgage",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser"
+      },
+      {
+        "@type": "SoftwareApplication", 
+        "name": "Auto Loan Calculator",
+        "description": "Calculate monthly auto loan payments for new and used vehicles",
+        "url": "https://financial-calc.com/calculators/auto-loan",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser"
+      }
+    ]
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          {/* Header Section */}
+          <div className="text-center mb-16">
+            <div className="flex justify-center mb-6">
+              <div className="bg-blue-100 rounded-full p-4">
+                <Calculator className="h-12 w-12 text-blue-600" aria-hidden="true" />
+              </div>
+            </div>
+            <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl mb-4">
+              Financial Calculators
+            </h1>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Calculate loan payments with personalized interest rates based on your credit score. 
+              Choose from our collection of accurate financial tools designed to help you make informed decisions.
+            </p>
+          </div>
+
+          {/* Calculator Grid */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+            {/* Mortgage Calculator Card */}
+            <article>
+              <Link href="/calculators/mortgage" className="group block h-full">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-8 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    <Home className="h-8 w-8 text-blue-600" aria-hidden="true" />
+                    <h2 className="ml-3 text-2xl font-semibold text-gray-900">Mortgage Calculator</h2>
+                  </div>
+                  <p className="text-gray-600 mb-6 flex-grow">
+                    Calculate your monthly mortgage payments with personalized interest rates based on your credit score.
+                    Compare 15, 20, 25, and 30-year loan terms to find the best option for your budget.
+                  </p>
+                  
+                  {/* Features List */}
+                  <ul className="text-sm text-gray-500 mb-6 space-y-1">
+                    <li>✓ Credit score-based interest rates</li>
+                    <li>✓ Multiple loan term options</li>
+                    <li>✓ Down payment calculator</li>
+                    <li>✓ Total interest breakdown</li>
+                  </ul>
+
+                  <div className="flex items-center text-blue-600 group-hover:text-blue-800 transition-colors">
+                    <span className="font-medium">Calculate Mortgage Payment</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
+
+            {/* Auto Loan Calculator Card */}
+            <article>
+              <Link href="/calculators/auto-loan" className="group block h-full">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-8 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    <Car className="h-8 w-8 text-green-600" aria-hidden="true" />
+                    <h2 className="ml-3 text-2xl font-semibold text-gray-900">Auto Loan Calculator</h2>
+                  </div>
+                  <p className="text-gray-600 mb-6 flex-grow">
+                    Determine your auto loan payments with rates tailored to your credit profile and vehicle type.
+                    Includes options for trade-in value, down payment, and new vs. used vehicle rates.
+                  </p>
+                  
+                  {/* Features List */}
+                  <ul className="text-sm text-gray-500 mb-6 space-y-1">
+                    <li>✓ New and used vehicle rates</li>
+                    <li>✓ Trade-in value calculator</li>
+                    <li>✓ Flexible loan terms</li>
+                    <li>✓ Credit-based pricing</li>
+                  </ul>
+
+                  <div className="flex items-center text-green-600 group-hover:text-green-800 transition-colors">
+                    <span className="font-medium">Calculate Auto Payment</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
+          </div>
+
+          {/* Benefits Section */}
+          <section className="bg-white rounded-lg shadow-md p-8">
+            <h3 className="text-2xl font-bold text-center text-gray-900 mb-8">
+              Why Our Calculators Are More Accurate
+            </h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="bg-blue-100 rounded-full p-3 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <TrendingUp className="h-8 w-8 text-blue-600" aria-hidden="true" />
+                </div>
+                <h4 className="text-lg font-semibold mb-2">Credit-Based Rates</h4>
+                <p className="text-gray-600 text-sm">
+                  Get personalized interest rates that reflect your actual credit score range, 
+                  not generic estimates that could be off by hundreds of dollars per month.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="bg-green-100 rounded-full p-3 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Calculator className="h-8 w-8 text-green-600" aria-hidden="true" />
+                </div>
+                <h4 className="text-lg font-semibold mb-2">Real-Time Data</h4>
+                <p className="text-gray-600 text-sm">
+                  Our calculations use current market data and industry-standard formulas 
+                  to provide the most accurate payment estimates possible.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="bg-purple-100 rounded-full p-3 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Home className="h-8 w-8 text-purple-600" aria-hidden="true" />
+                </div>
+                <h4 className="text-lg font-semibold mb-2">Complete Analysis</h4>
+                <p className="text-gray-600 text-sm">
+                  Beyond monthly payments, see total interest costs, payment breakdowns, 
+                  and suggestions for improving your loan terms.
+                </p>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </>
+  )
+}
