@@ -17,7 +17,7 @@ export default function CreditScoreMortgageRatePost() {
               {meta.title}
             </h1>
             <div className="flex items-center text-gray-600 text-sm">
-              <time dateTime="2024-12-20">Published: December 20, 2024</time>
+              <time dateTime="2025-09-07">Published: September 7, 2025</time>
               <span className="mx-2">•</span>
               <span>Reading time: 6 minutes</span>
             </div>

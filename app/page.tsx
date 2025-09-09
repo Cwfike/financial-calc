@@ -196,7 +196,7 @@ export default function HomePage() {
                     Includes current rate examples and practical improvement tips.
                   </p>
                   <div className="text-xs text-gray-500 mt-2">
-                    Published: December 20, 2024 • 6 minute read
+                    Published: September 7, 2025 • 6 minute read
                   </div>
                 </div>
                 <div className="flex-shrink-0">
