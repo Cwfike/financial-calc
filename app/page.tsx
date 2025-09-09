@@ -1,14 +1,16 @@
 import Link from 'next/link'
-import { Calculator, Car, Home, TrendingUp } from 'lucide-react'
+import { Calculator, Car, CreditCard, Home, TrendingUp } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Financial Calc - Free Mortgage & Auto Loan Calculators',
-  description: 'Calculate mortgage and auto loan payments with personalized interest rates based on your credit score. Get accurate monthly payments, total interest, and loan comparisons instantly.',
+  title: 'Financial Calc - Free Mortgage, Auto Loan & Credit Card Calculators',
+  description: 'Calculate mortgage, auto loan, and credit card payoff with personalized interest rates based on your credit score. Get accurate monthly payments, total interest, and debt payoff strategies instantly.',
   keywords: [
     'mortgage calculator',
     'auto loan calculator',
+    'credit card payoff calculator',
     'loan payment calculator',
+    'debt payoff calculator',
     'credit score mortgage rates',
     'monthly payment calculator',
     'home loan calculator',
@@ -16,8 +18,8 @@ export const metadata: Metadata = {
     'interest rate calculator'
   ],
   openGraph: {
-    title: 'Financial Calc - Free Mortgage & Auto Loan Calculators',
-    description: 'Calculate loan payments with credit-based interest rates. Free, accurate financial calculators with real-time results.',
+    title: 'Financial Calc - Free Mortgage, Auto Loan & Credit Card Calculators',
+    description: 'Calculate loan payments and debt payoff with credit-based interest rates. Free, accurate financial calculators with real-time results.',
     url: 'https://financial-calc.com',
     images: [
       {
@@ -38,7 +40,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Financial Calc",
-    "description": "Free mortgage and auto loan calculators with credit-based interest rates",
+    "description": "Free mortgage, auto loan, and credit card payoff calculators with credit-based interest rates",
     "url": "https://financial-calc.com",
     "potentialAction": {
       "@type": "SearchAction",
@@ -79,6 +81,19 @@ export default function HomePage() {
           "price": "0",
           "priceCurrency": "USD"
         }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Credit Card Payoff Calculator",
+        "description": "Calculate credit card debt payoff time and total interest costs",
+        "url": "https://financial-calc.com/calculators/credit-card",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       }
     ]
   }
@@ -98,13 +113,13 @@ export default function HomePage() {
               Smart Financial Calculators
             </h2>
             <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-              Get accurate loan calculations with personalized interest rates based on your credit score. 
+              Get accurate loan calculations and debt payoff strategies with personalized interest rates based on your credit score. 
               Make informed financial decisions with our easy-to-use tools.
             </p>
           </div>
 
           {/* Calculator Cards */}
-          <div className="mt-16 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Mortgage Calculator Card */}
             <article>
               <Link href="/calculators/mortgage" className="group block">
@@ -114,8 +129,7 @@ export default function HomePage() {
                     <h3 className="ml-3 text-2xl font-semibold text-gray-900">Mortgage Calculator</h3>
                   </div>
                   <p className="text-gray-600 mb-6">
-                    Calculate your monthly mortgage payments with personalized interest rates based on your credit score.
-                    Compare 15, 20, 25, and 30-year loan terms.
+                    Calculate your monthly mortgage payments with personalized interest rates based on your credit score and loan terms.
                   </p>
                   <div className="flex items-center text-blue-600 group-hover:text-blue-800 transition-colors">
                     <span className="font-medium">Calculate Mortgage Payment</span>
@@ -134,11 +148,30 @@ export default function HomePage() {
                     <h3 className="ml-3 text-2xl font-semibold text-gray-900">Auto Loan Calculator</h3>
                   </div>
                   <p className="text-gray-600 mb-6">
-                    Determine your auto loan payments with rates tailored to your credit profile and vehicle type.
-                    Includes trade-in value and down payment options.
+                    Determine your auto loan payments with rates tailored to your credit profile and vehicle type, including trade-in options.
                   </p>
                   <div className="flex items-center text-green-600 group-hover:text-green-800 transition-colors">
                     <span className="font-medium">Calculate Auto Payment</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
+
+            {/* Credit Card Calculator Card */}
+            <article className="md:col-span-2 lg:col-span-1">
+              <Link href="/calculators/credit-card" className="group block">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8">
+                  <div className="flex items-center mb-4">
+                    <CreditCard className="h-8 w-8 text-red-600" aria-hidden="true" />
+                    <h3 className="ml-3 text-2xl font-semibold text-gray-900">Credit Card Payoff</h3>
+                  </div>
+                  <p className="text-gray-600 mb-6">
+                    Calculate how long it takes to pay off credit card debt and total interest costs.
+                    Compare minimum vs fixed payment strategies.
+                  </p>
+                  <div className="flex items-center text-red-600 group-hover:text-red-800 transition-colors">
+                    <span className="font-medium">Calculate Debt Payoff</span>
                     <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
                   </div>
                 </div>

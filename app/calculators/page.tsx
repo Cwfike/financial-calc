@@ -1,22 +1,24 @@
 import Link from 'next/link'
-import { Calculator, Car, Home, TrendingUp } from 'lucide-react'
+import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Financial Calculators - Mortgage & Auto Loan Tools | Financial Calc',
-  description: 'Access all our free financial calculators in one place. Calculate mortgage payments, auto loans, and more with personalized rates based on your credit score.',
+  title: 'Financial Calculators - Mortgage, Auto Loan & Credit Card Tools | Financial Calc',
+  description: 'Access all our free financial calculators in one place. Calculate mortgage payments, auto loans, credit card payoff, and more with personalized rates based on your credit score.',
   keywords: [
     'financial calculators',
     'mortgage calculator',
     'auto loan calculator',
+    'credit card payoff calculator',
+    'debt payoff calculator',
     'loan calculators',
     'credit score based rates',
     'monthly payment calculator',
     'loan comparison tools'
   ],
   openGraph: {
-    title: 'Financial Calculators - Mortgage & Auto Loan Tools',
-    description: 'Free financial calculators with personalized rates. Calculate mortgage payments, auto loans, and compare loan options.',
+    title: 'Financial Calculators - Mortgage, Auto Loan & Credit Card Tools',
+    description: 'Free financial calculators with personalized rates. Calculate mortgage payments, auto loans, credit card payoff, and compare loan options.',
     url: 'https://financial-calc.com/calculators',
   },
   alternates: {
@@ -29,7 +31,7 @@ export default function CalculatorsPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Financial Calculators",
-    "description": "Collection of free financial calculators including mortgage and auto loan tools",
+    "description": "Collection of free financial calculators including mortgage, auto loan, and credit card payoff tools",
     "url": "https://financial-calc.com/calculators",
     "mainEntity": [
       {
@@ -45,6 +47,14 @@ export default function CalculatorsPage() {
         "name": "Auto Loan Calculator",
         "description": "Calculate monthly auto loan payments for new and used vehicles",
         "url": "https://financial-calc.com/calculators/auto-loan",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Credit Card Payoff Calculator",
+        "description": "Calculate credit card debt payoff time and total interest costs",
+        "url": "https://financial-calc.com/calculators/credit-card",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web Browser"
       }
@@ -71,13 +81,13 @@ export default function CalculatorsPage() {
               Financial Calculators
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Calculate loan payments with personalized interest rates based on your credit score. 
+              Calculate loan payments and debt payoff strategies with personalized interest rates based on your credit score. 
               Choose from our collection of accurate financial tools designed to help you make informed decisions.
             </p>
           </div>
 
           {/* Calculator Grid */}
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
             {/* Mortgage Calculator Card */}
             <article>
               <Link href="/calculators/mortgage" className="group block h-full">
@@ -135,7 +145,69 @@ export default function CalculatorsPage() {
                 </div>
               </Link>
             </article>
+
+            {/* Credit Card Calculator Card */}
+            <article className="md:col-span-2 lg:col-span-1">
+              <Link href="/calculators/credit-card" className="group block h-full">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-8 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    <CreditCard className="h-8 w-8 text-red-600" aria-hidden="true" />
+                    <h2 className="ml-3 text-2xl font-semibold text-gray-900">Credit Card Payoff</h2>
+                  </div>
+                  <p className="text-gray-600 mb-6 flex-grow">
+                    Calculate how long it takes to pay off credit card debt and total interest costs.
+                    Compare minimum payment vs fixed payment strategies to save money.
+                  </p>
+                  
+                  {/* Features List */}
+                  <ul className="text-sm text-gray-500 mb-6 space-y-1">
+                    <li>✓ Debt payoff time calculator</li>
+                    <li>✓ Total interest breakdown</li>
+                    <li>✓ Payment strategy comparison</li>
+                    <li>✓ APR-based calculations</li>
+                  </ul>
+
+                  <div className="flex items-center text-red-600 group-hover:text-red-800 transition-colors">
+                    <span className="font-medium">Calculate Debt Payoff</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
           </div>
+
+          {/* Latest Blog Post Section */}
+          <section className="mb-16">
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <div className="flex items-center mb-4">
+                <BookOpen className="h-6 w-6 text-blue-600 mr-3" aria-hidden="true" />
+                <h3 className="text-xl font-semibold text-gray-900">Latest from Our Blog</h3>
+              </div>
+              <div className="flex flex-col md:flex-row md:items-center justify-between">
+                <div className="flex-grow mb-4 md:mb-0 md:mr-6">
+                  <h4 className="text-lg font-medium text-gray-900 mb-2">
+                    How Your Credit Score Affects Your Mortgage Rate
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    Learn how credit scores impact mortgage interest rates and discover how much money you could save by improving your credit. 
+                    Includes current rate examples and practical improvement tips.
+                  </p>
+                  <div className="text-xs text-gray-500 mt-2">
+                    Published: December 20, 2024 • 6 minute read
+                  </div>
+                </div>
+                <div className="flex-shrink-0">
+                  <Link
+                    href="/blog/credit-score-mortgage-rate"
+                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Read Article
+                    <TrendingUp className="ml-2 h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
 
           {/* Benefits Section */}
           <section className="bg-white rounded-lg shadow-md p-8">

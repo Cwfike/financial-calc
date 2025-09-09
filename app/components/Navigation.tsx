@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Calculator, Home, Car, ChevronDown, Menu, X } from 'lucide-react'
+import { Calculator, Home, Car, CreditCard, ChevronDown, Menu, X } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
 export default function Navigation() {
@@ -25,6 +25,13 @@ export default function Navigation() {
       description: 'Calculate car loan payments',
       icon: Car,
       color: 'text-green-600'
+    },
+    {
+      href: '/calculators/credit-card',
+      name: 'Credit Card Payoff Calculator',
+      description: 'Calculate debt payoff time & interest',
+      icon: CreditCard,
+      color: 'text-red-600'
     }
   ]
 
