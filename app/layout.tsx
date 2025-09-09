@@ -82,9 +82,69 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Financial Calc",
+    "url": "https://financial-calc.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://financial-calc.com/logo.png",
+      "width": 600,
+      "height": 60
+    },
+    "description": "Free mortgage, auto loan, and credit card payoff calculators with credit-based interest rates",
+    "foundingDate": "2024",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "url": "https://financial-calc.com"
+    },
+    "sameAs": [
+      "https://financial-calc.com"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    },
+    "areaServed": "US",
+    "serviceType": "Financial Calculator Services",
+    "knowsAbout": [
+      "Mortgage Calculations",
+      "Auto Loan Calculations", 
+      "Credit Card Payoff Calculations",
+      "Interest Rate Calculations",
+      "Credit Score Impact on Loans"
+    ],
+    "offers": [
+      {
+        "@type": "Service",
+        "name": "Mortgage Calculator",
+        "description": "Calculate monthly mortgage payments with credit score-based interest rates",
+        "url": "https://financial-calc.com/calculators/mortgage"
+      },
+      {
+        "@type": "Service", 
+        "name": "Auto Loan Calculator",
+        "description": "Calculate monthly auto loan payments for new and used vehicles",
+        "url": "https://financial-calc.com/calculators/auto-loan"
+      },
+      {
+        "@type": "Service",
+        "name": "Credit Card Payoff Calculator", 
+        "description": "Calculate credit card debt payoff time and total interest costs",
+        "url": "https://financial-calc.com/calculators/credit-card"
+      }
+    ]
+  }
+
   return (
     <html lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <meta name="fo-verify" content="78422bb1-0331-4940-af1e-b4cf69cdae29" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />

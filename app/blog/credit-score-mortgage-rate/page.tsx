@@ -5,8 +5,70 @@ import { meta } from "./meta"
 export const metadata = meta
 
 export default function CreditScoreMortgageRatePost() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": meta.title,
+    "description": meta.description,
+    "author": {
+      "@type": "Organization",
+      "name": "Financial Calc",
+      "url": "https://financial-calc.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Financial Calc",
+      "url": "https://financial-calc.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://financial-calc.com/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "datePublished": "2025-09-07T00:00:00-07:00",
+    "dateModified": "2025-09-07T00:00:00-07:00",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://financial-calc.com/blog/credit-score-mortgage-rate"
+    },
+    "articleSection": "Personal Finance",
+    "keywords": meta.keywords,
+    "wordCount": 2100,
+    "timeRequired": "PT6M",
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Credit Score",
+        "description": "A numerical expression based on credit files that represents creditworthiness"
+      },
+      {
+        "@type": "Thing", 
+        "name": "Mortgage Rate",
+        "description": "The interest rate charged on a mortgage loan"
+      },
+      {
+        "@type": "Thing",
+        "name": "Home Loan",
+        "description": "A loan used to purchase or refinance a home"
+      }
+    ],
+    "mentions": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Mortgage Calculator",
+        "url": "https://financial-calc.com/calculators/mortgage",
+        "applicationCategory": "FinanceApplication"
+      }
+    ]
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
 
       {/* Article */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

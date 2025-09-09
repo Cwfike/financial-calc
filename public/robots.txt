@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://financial-calc.com
+
+# Sitemaps
+Sitemap: https://financial-calc.com/sitemap.xml

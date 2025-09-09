@@ -76,8 +76,25 @@ export default function Breadcrumb() {
     return null
   }
 
+  // Generate structured data for breadcrumbs
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": `https://financial-calc.com${item.href}`
+    }))
+  }
+
   return (
-    <nav className="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <nav className="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ol className="flex items-center space-x-2 py-3 text-sm">
           {breadcrumbs.map((item, index) => (
@@ -109,5 +126,6 @@ export default function Breadcrumb() {
         </ol>
       </div>
     </nav>
+    </>
   )
 }
