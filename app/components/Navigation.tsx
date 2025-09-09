@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Calculator, Home, Car, CreditCard, ChevronDown, Menu, X } from 'lucide-react'
+import { Calculator, Home, Car, CreditCard, ChevronDown, Menu, X, PieChart } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
 export default function Navigation() {
@@ -32,6 +32,13 @@ export default function Navigation() {
       description: 'Calculate debt payoff time & interest',
       icon: CreditCard,
       color: 'text-red-600'
+    },
+    {
+      href: '/calculators/debt-consolidation',
+      name: 'Debt Consolidation Calculator',
+      description: 'Compare consolidation loan savings',
+      icon: PieChart,
+      color: 'text-purple-600'
     }
   ]
 

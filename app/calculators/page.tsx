@@ -1,14 +1,15 @@
 import Link from 'next/link'
-import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen } from 'lucide-react'
+import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen, PieChart } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Financial Calculators - Mortgage, Auto Loan & Credit Card Tools | Financial Calc',
-  description: 'Access all our free financial calculators in one place. Calculate mortgage payments, auto loans, credit card payoff, and more with personalized rates based on your credit score.',
+  title: 'Financial Calculators - Mortgage, Auto Loan, Debt Consolidation & Credit Card Tools | Financial Calc',
+  description: 'Access all our free financial calculators in one place. Calculate mortgage payments, auto loans, debt consolidation savings, credit card payoff, and more with personalized rates based on your credit score.',
   keywords: [
     'financial calculators',
     'mortgage calculator',
     'auto loan calculator',
+    'debt consolidation calculator',
     'credit card payoff calculator',
     'debt payoff calculator',
     'loan calculators',
@@ -17,8 +18,8 @@ export const metadata: Metadata = {
     'loan comparison tools'
   ],
   openGraph: {
-    title: 'Financial Calculators - Mortgage, Auto Loan & Credit Card Tools',
-    description: 'Free financial calculators with personalized rates. Calculate mortgage payments, auto loans, credit card payoff, and compare loan options.',
+    title: 'Financial Calculators - Mortgage, Auto Loan, Debt Consolidation & Credit Card Tools',
+    description: 'Free financial calculators with personalized rates. Calculate mortgage payments, auto loans, debt consolidation savings, credit card payoff, and compare loan options.',
     url: 'https://financial-calc.com/calculators',
   },
   alternates: {
@@ -31,7 +32,7 @@ export default function CalculatorsPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "Financial Calculators",
-    "description": "Collection of free financial calculators including mortgage, auto loan, and credit card payoff tools",
+    "description": "Collection of free financial calculators including mortgage, auto loan, debt consolidation, and credit card payoff tools",
     "url": "https://financial-calc.com/calculators",
     "mainEntity": [
       {
@@ -55,6 +56,14 @@ export default function CalculatorsPage() {
         "name": "Credit Card Payoff Calculator",
         "description": "Calculate credit card debt payoff time and total interest costs",
         "url": "https://financial-calc.com/calculators/credit-card",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Debt Consolidation Calculator",
+        "description": "Calculate debt consolidation savings with personalized rates and payment comparisons",
+        "url": "https://financial-calc.com/calculators/debt-consolidation",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web Browser"
       }
@@ -87,7 +96,7 @@ export default function CalculatorsPage() {
           </div>
 
           {/* Calculator Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
             {/* Mortgage Calculator Card */}
             <article>
               <Link href="/calculators/mortgage" className="group block h-full">
@@ -147,7 +156,7 @@ export default function CalculatorsPage() {
             </article>
 
             {/* Credit Card Calculator Card */}
-            <article className="md:col-span-2 lg:col-span-1">
+            <article>
               <Link href="/calculators/credit-card" className="group block h-full">
                 <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-8 h-full flex flex-col">
                   <div className="flex items-center mb-4">
@@ -169,6 +178,35 @@ export default function CalculatorsPage() {
 
                   <div className="flex items-center text-red-600 group-hover:text-red-800 transition-colors">
                     <span className="font-medium">Calculate Debt Payoff</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
+
+            {/* Debt Consolidation Calculator Card */}
+            <article>
+              <Link href="/calculators/debt-consolidation" className="group block h-full">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-8 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    <PieChart className="h-8 w-8 text-purple-600" aria-hidden="true" />
+                    <h2 className="ml-3 text-2xl font-semibold text-gray-900">Debt Consolidation</h2>
+                  </div>
+                  <p className="text-gray-600 mb-6 flex-grow">
+                    Compare your current debts with consolidation loan options. See potential savings, 
+                    simplified payments, and get personalized rates based on your credit score.
+                  </p>
+                  
+                  {/* Features List */}
+                  <ul className="text-sm text-gray-500 mb-6 space-y-1">
+                    <li>✓ Multiple debt analysis</li>
+                    <li>✓ Before/after comparisons</li>
+                    <li>✓ Credit score-based rates</li>
+                    <li>✓ Interactive charts</li>
+                  </ul>
+
+                  <div className="flex items-center text-purple-600 group-hover:text-purple-800 transition-colors">
+                    <span className="font-medium">Calculate Savings</span>
                     <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
                   </div>
                 </div>

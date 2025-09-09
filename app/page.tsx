@@ -1,13 +1,14 @@
 import Link from 'next/link'
-import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen } from 'lucide-react'
+import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen, PieChart } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Financial Calc - Free Mortgage, Auto Loan & Credit Card Calculators',
-  description: 'Calculate mortgage, auto loan, and credit card payoff with personalized interest rates based on your credit score. Get accurate monthly payments, total interest, and debt payoff strategies instantly.',
+  title: 'Financial Calc - Free Mortgage, Auto Loan & Debt Consolidation Calculators',
+  description: 'Calculate mortgage, auto loan, debt consolidation, and credit card payoff with personalized interest rates based on your credit score. Get accurate monthly payments, total interest, and debt payoff strategies instantly.',
   keywords: [
     'mortgage calculator',
     'auto loan calculator',
+    'debt consolidation calculator',
     'credit card payoff calculator',
     'loan payment calculator',
     'debt payoff calculator',
@@ -18,8 +19,8 @@ export const metadata: Metadata = {
     'interest rate calculator'
   ],
   openGraph: {
-    title: 'Financial Calc - Free Mortgage, Auto Loan & Credit Card Calculators',
-    description: 'Calculate loan payments and debt payoff with credit-based interest rates. Free, accurate financial calculators with real-time results.',
+    title: 'Financial Calc - Free Mortgage, Auto Loan & Debt Consolidation Calculators',
+    description: 'Calculate loan payments, debt consolidation savings, and debt payoff with credit-based interest rates. Free, accurate financial calculators with real-time results.',
     url: 'https://financial-calc.com',
     images: [
       {
@@ -40,7 +41,7 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Financial Calc",
-    "description": "Free mortgage, auto loan, and credit card payoff calculators with credit-based interest rates",
+    "description": "Free mortgage, auto loan, debt consolidation, and credit card payoff calculators with credit-based interest rates",
     "url": "https://financial-calc.com",
     "potentialAction": {
       "@type": "SearchAction",
@@ -94,6 +95,19 @@ export default function HomePage() {
           "price": "0",
           "priceCurrency": "USD"
         }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Debt Consolidation Calculator",
+        "description": "Calculate debt consolidation savings with personalized rates and payment comparisons",
+        "url": "https://financial-calc.com/calculators/debt-consolidation",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       }
     ]
   }
@@ -119,7 +133,7 @@ export default function HomePage() {
           </div>
 
           {/* Calculator Cards */}
-          <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* Mortgage Calculator Card */}
             <article>
               <Link href="/calculators/mortgage" className="group block">
@@ -159,7 +173,7 @@ export default function HomePage() {
             </article>
 
             {/* Credit Card Calculator Card */}
-            <article className="md:col-span-2 lg:col-span-1">
+            <article>
               <Link href="/calculators/credit-card" className="group block">
                 <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8">
                   <div className="flex items-center mb-4">
@@ -172,6 +186,25 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center text-red-600 group-hover:text-red-800 transition-colors">
                     <span className="font-medium">Calculate Debt Payoff</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
+
+            {/* Debt Consolidation Calculator Card */}
+            <article>
+              <Link href="/calculators/debt-consolidation" className="group block">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8">
+                  <div className="flex items-center mb-4">
+                    <PieChart className="h-8 w-8 text-purple-600" aria-hidden="true" />
+                    <h3 className="ml-3 text-2xl font-semibold text-gray-900">Debt Consolidation</h3>
+                  </div>
+                  <p className="text-gray-600 mb-6">
+                    Compare your current debts with consolidation loan options. See potential savings and simplified payments.
+                  </p>
+                  <div className="flex items-center text-purple-600 group-hover:text-purple-800 transition-colors">
+                    <span className="font-medium">Calculate Savings</span>
                     <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
                   </div>
                 </div>
