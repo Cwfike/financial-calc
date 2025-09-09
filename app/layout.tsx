@@ -108,7 +108,6 @@ export default function RootLayout({
       "addressCountry": "US"
     },
     "areaServed": "US",
-    "serviceType": "Financial Calculator Services",
     "knowsAbout": [
       "Mortgage Calculations",
       "Auto Loan Calculations", 
@@ -118,22 +117,37 @@ export default function RootLayout({
     ],
     "offers": [
       {
-        "@type": "Service",
-        "name": "Mortgage Calculator",
-        "description": "Calculate monthly mortgage payments with credit score-based interest rates",
-        "url": "https://financial-calc.com/calculators/mortgage"
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Mortgage Calculator",
+          "description": "Calculate monthly mortgage payments with credit score-based interest rates"
+        },
+        "url": "https://financial-calc.com/calculators/mortgage",
+        "price": "0",
+        "priceCurrency": "USD"
       },
       {
-        "@type": "Service", 
-        "name": "Auto Loan Calculator",
-        "description": "Calculate monthly auto loan payments for new and used vehicles",
-        "url": "https://financial-calc.com/calculators/auto-loan"
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service", 
+          "name": "Auto Loan Calculator",
+          "description": "Calculate monthly auto loan payments for new and used vehicles"
+        },
+        "url": "https://financial-calc.com/calculators/auto-loan",
+        "price": "0",
+        "priceCurrency": "USD"
       },
       {
-        "@type": "Service",
-        "name": "Credit Card Payoff Calculator", 
-        "description": "Calculate credit card debt payoff time and total interest costs",
-        "url": "https://financial-calc.com/calculators/credit-card"
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Credit Card Payoff Calculator", 
+          "description": "Calculate credit card debt payoff time and total interest costs"
+        },
+        "url": "https://financial-calc.com/calculators/credit-card",
+        "price": "0",
+        "priceCurrency": "USD"
       }
     ]
   }
