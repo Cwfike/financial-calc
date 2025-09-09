@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calculator, Car, CreditCard, Home, TrendingUp } from 'lucide-react'
+import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -178,6 +178,39 @@ export default function HomePage() {
               </Link>
             </article>
           </div>
+
+          {/* Latest Blog Post Section */}
+          <section className="mt-20 mb-20">
+            <div className="bg-white rounded-lg shadow-md p-8">
+              <div className="flex items-center mb-4">
+                <BookOpen className="h-6 w-6 text-blue-600 mr-3" aria-hidden="true" />
+                <h3 className="text-xl font-semibold text-gray-900">Latest from Our Blog</h3>
+              </div>
+              <div className="flex flex-col md:flex-row md:items-center justify-between">
+                <div className="flex-grow mb-4 md:mb-0 md:mr-6">
+                  <h4 className="text-lg font-medium text-gray-900 mb-2">
+                    How Your Credit Score Affects Your Mortgage Rate
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    Learn how credit scores impact mortgage interest rates and discover how much money you could save by improving your credit. 
+                    Includes current rate examples and practical improvement tips.
+                  </p>
+                  <div className="text-xs text-gray-500 mt-2">
+                    Published: December 20, 2024 • 6 minute read
+                  </div>
+                </div>
+                <div className="flex-shrink-0">
+                  <Link
+                    href="/blog/credit-score-mortgage-rate"
+                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Read Article
+                    <TrendingUp className="ml-2 h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
 
           {/* Features Section */}
           <section className="mt-20">
