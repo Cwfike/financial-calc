@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import Link from 'next/link'
 import { Calculator, CreditCard, DollarSign, TrendingDown, Plus, Trash2, Mail, ChevronDown, ChevronUp } from 'lucide-react'
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts'
 
@@ -854,6 +855,25 @@ export default function DebtConsolidationCalculator() {
                 Balance transfers, debt management plans, or the debt avalanche method may be better options depending on your situation.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Related Calculators — internal linking for SEO */}
+        <section className="mt-8 bg-white rounded-lg shadow-lg p-8" aria-label="Related calculators">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Related Calculators</h2>
+          <div className="grid sm:grid-cols-3 gap-4">
+            <Link href="/calculators/mortgage" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
+              <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Mortgage Calculator</div>
+              <div className="text-sm text-gray-500">Calculate home loan payments based on your credit score</div>
+            </Link>
+            <Link href="/calculators/auto-loan" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
+              <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Auto Loan Calculator</div>
+              <div className="text-sm text-gray-500">Calculate car payments for new or used vehicles</div>
+            </Link>
+            <Link href="/calculators/credit-card" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
+              <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Credit Card Payoff Calculator</div>
+              <div className="text-sm text-gray-500">See how long to pay off your credit card balance</div>
+            </Link>
           </div>
         </section>
       </div>

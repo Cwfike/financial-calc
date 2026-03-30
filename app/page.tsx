@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Financial Calc - Free Mortgage, Auto Loan & Debt Consolidation Calculators',
-  description: 'Calculate mortgage, auto loan, debt consolidation, and credit card payoff with personalized interest rates based on your credit score. Get accurate monthly payments, total interest, and debt payoff strategies instantly.',
+  description: 'Free financial calculators personalized to your credit score. Mortgage, auto loan, credit card payoff & debt consolidation. Get accurate results instantly.',
   keywords: [
     'mortgage calculator',
     'auto loan calculator',

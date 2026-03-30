@@ -262,7 +262,12 @@ export default function CreditScoreMortgageRatePost() {
               Even with excellent credit, a high debt-to-income ratio can result
               in higher rates or loan denial. Most lenders prefer to see your
               total monthly debt payments (including the new mortgage) at 43% or
-              less of your gross income.
+              less of your gross income. If you&apos;re carrying high-interest debt,
+              our{' '}
+              <Link href="/calculators/debt-consolidation" className="text-blue-600 hover:text-blue-800 underline">
+                debt consolidation calculator
+              </Link>{' '}
+              can show you whether consolidating could lower your monthly obligations before you apply.
             </p>
 
             <h3 className="text-xl font-semibold text-gray-800 mt-6 mb-3">
@@ -290,7 +295,11 @@ export default function CreditScoreMortgageRatePost() {
                 <p className="text-gray-700">
                   Credit utilization (the percentage of available credit
                   you&apos;re using) heavily impacts your score. Aim to use less
-                  than 30% of available credit, ideally under 10%.
+                  than 30% of available credit, ideally under 10%. Use our{' '}
+                  <Link href="/calculators/credit-card" className="text-blue-600 hover:text-blue-800 underline">
+                    credit card payoff calculator
+                  </Link>{' '}
+                  to build a strategy for paying down your balances before applying.
                 </p>
               </div>
 
@@ -353,19 +362,37 @@ export default function CreditScoreMortgageRatePost() {
                 See How Your Credit Score Affects Your Payment
               </h3>
               <p className="text-blue-800 mb-4">
-                Use our mortgage calculator to see how different credit scores
-                and interest rates would affect your specific situation. By
-                inputting various scenarios, you can better understand the
-                financial impact of improving your credit score before applying
-                for your home loan.
+                Use our free calculators to see how your credit score affects
+                your real interest rate across every major loan type. Enter your
+                score range and get personalized payment estimates in seconds.
               </p>
-              <Link
-                href="/calculators/mortgage"
-                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                <Calculator className="h-5 w-5 mr-2" />
-                Try Our Mortgage Calculator
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/calculators/mortgage"
+                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <Calculator className="h-4 w-4 mr-2" />
+                  Mortgage Calculator
+                </Link>
+                <Link
+                  href="/calculators/auto-loan"
+                  className="inline-flex items-center px-4 py-2 bg-white text-blue-700 font-medium rounded-lg border border-blue-300 hover:bg-blue-50 transition-colors"
+                >
+                  Auto Loan Calculator
+                </Link>
+                <Link
+                  href="/calculators/credit-card"
+                  className="inline-flex items-center px-4 py-2 bg-white text-blue-700 font-medium rounded-lg border border-blue-300 hover:bg-blue-50 transition-colors"
+                >
+                  Credit Card Payoff
+                </Link>
+                <Link
+                  href="/calculators/debt-consolidation"
+                  className="inline-flex items-center px-4 py-2 bg-white text-blue-700 font-medium rounded-lg border border-blue-300 hover:bg-blue-50 transition-colors"
+                >
+                  Debt Consolidation
+                </Link>
+              </div>
             </div>
           </div>
         </div>

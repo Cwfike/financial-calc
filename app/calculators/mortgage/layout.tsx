@@ -24,7 +24,7 @@ const structuredData = {
 
 export const metadata: Metadata = {
   title: 'Mortgage Calculator - Calculate Monthly Payments by Credit Score | Financial Calc',
-  description: 'Free mortgage calculator with credit score-based interest rates. Calculate monthly payments, total interest, and compare 15, 20, 25, and 30-year mortgage terms. Get instant accurate results.',
+  description: 'Free mortgage calculator with rates based on your credit score. See your real monthly payment instantly. Compare 15, 20, 25 & 30-year terms — no sign-up needed.',
   keywords: [
     'mortgage calculator',
     'home loan calculator',

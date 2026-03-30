@@ -24,7 +24,7 @@ const structuredData = {
 
 export const metadata: Metadata = {
   title: 'Credit Card Payoff Calculator - Calculate Debt Payoff Time & Interest | Financial Calc',
-  description: 'Free credit card payoff calculator. Calculate how long it takes to pay off credit card debt, total interest costs, and compare minimum vs fixed payment strategies.',
+  description: 'Free credit card payoff calculator. See how long to pay off your debt and total interest. Compare minimum vs fixed payments — get your exact payoff date now.',
   keywords: [
     'credit card payoff calculator',
     'debt payoff calculator',

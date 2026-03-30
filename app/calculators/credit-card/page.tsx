@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { CreditCard, Clock, DollarSign } from 'lucide-react'
 
 // Credit card payoff calculation functions
@@ -406,6 +407,25 @@ export default function CreditCardCalculator() {
               <h4 className="font-medium text-gray-800 mb-2">Avoid New Charges</h4>
               <p>Stop using the card while paying it off. New purchases make it harder to pay down your balance and extend your debt payoff timeline.</p>
             </div>
+          </div>
+        </section>
+
+        {/* Related Calculators — internal linking for SEO */}
+        <section className="mt-8 bg-white rounded-lg shadow-lg p-8" aria-label="Related calculators">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Related Calculators</h2>
+          <div className="grid sm:grid-cols-3 gap-4">
+            <Link href="/calculators/mortgage" className="block p-4 border border-gray-200 rounded-lg hover:border-red-400 hover:shadow-md transition-all group">
+              <div className="font-medium text-gray-900 group-hover:text-red-600 mb-1">Mortgage Calculator</div>
+              <div className="text-sm text-gray-500">Calculate home loan payments based on your credit score</div>
+            </Link>
+            <Link href="/calculators/auto-loan" className="block p-4 border border-gray-200 rounded-lg hover:border-red-400 hover:shadow-md transition-all group">
+              <div className="font-medium text-gray-900 group-hover:text-red-600 mb-1">Auto Loan Calculator</div>
+              <div className="text-sm text-gray-500">Calculate car payments for new or used vehicles</div>
+            </Link>
+            <Link href="/calculators/debt-consolidation" className="block p-4 border border-gray-200 rounded-lg hover:border-red-400 hover:shadow-md transition-all group">
+              <div className="font-medium text-gray-900 group-hover:text-red-600 mb-1">Debt Consolidation Calculator</div>
+              <div className="text-sm text-gray-500">See if consolidating your debt could save you money</div>
+            </Link>
           </div>
         </section>
       </div>

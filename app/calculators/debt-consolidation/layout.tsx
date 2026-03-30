@@ -24,7 +24,7 @@ const structuredData = {
 
 export const metadata: Metadata = {
   title: 'Debt Consolidation Calculator - Compare Loan Options',
-  description: 'Calculate debt consolidation savings with our comprehensive calculator. Compare interest rates, monthly payments, and total costs. Get personalized consolidation loan rates based on your credit score.',
+  description: 'Free debt consolidation calculator with rates based on your credit score. Compare current vs. consolidation loan payments and calculate your total savings now.',
   keywords: [
     'debt consolidation calculator',
     'debt payoff calculator', 

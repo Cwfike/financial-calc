@@ -25,7 +25,7 @@ const structuredData = {
 
 export const metadata: Metadata = {
   title: 'Auto Loan Calculator - Calculate Car Payments by Credit Score | Financial Calc',
-  description: 'Free auto loan calculator with credit score-based interest rates. Calculate monthly car payments for new and used vehicles. Compare loan terms and see total interest costs.',
+  description: 'Free auto loan calculator with credit score-based rates. Get monthly car payments for new or used vehicles. Compare loan terms & total interest — free.',
   keywords: [
     'auto loan calculator',
     'car payment calculator',
