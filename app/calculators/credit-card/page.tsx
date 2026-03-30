@@ -127,44 +127,23 @@ export default function CreditCardCalculator() {
   }
 
   // Structured data for SEO
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Credit Card Payoff Calculator",
-    "description": "Calculate how long it takes to pay off credit card debt, total interest costs, and compare payment strategies",
-    "url": "https://financial-calc.com/calculators/credit-card",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "featureList": [
-      "Credit card payoff time calculation",
-      "Total interest calculation",
-      "Minimum vs fixed payment comparison",
-      "Monthly interest breakdown",
-      "Debt elimination strategies",
-      "APR-based calculations"
-    ]
-  }
-
-  useEffect(() => {
-    // Add structured data to page
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.text = JSON.stringify(structuredData)
-    document.head.appendChild(script)
-
-    return () => {
-      document.head.removeChild(script)
-    }
-  }, [])
+  // Note: JSON-LD structured data is now rendered server-side in layout.tsx
+  // so Googlebot sees it in the raw HTML without needing JavaScript execution.
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        {/* Page Header — H1 required for SEO; must be in server-rendered HTML */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Credit Card Payoff Calculator
+          </h1>
+          <p className="text-gray-600">
+            See exactly how long it takes to pay off your credit card debt and how much interest you&apos;ll pay.
+          </p>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Calculator Form */}
           <div className="bg-white rounded-lg shadow-lg p-8">

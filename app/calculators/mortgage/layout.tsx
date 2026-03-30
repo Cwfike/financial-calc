@@ -1,5 +1,27 @@
 import type { Metadata } from 'next'
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Mortgage Calculator",
+  "description": "Calculate monthly mortgage payments with credit score-based interest rates for 15, 20, 25, and 30-year terms",
+  "url": "https://financial-calc.com/calculators/mortgage",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Credit score-based interest rates",
+    "Multiple loan term options (15, 20, 25, 30 years)",
+    "Real-time payment calculations",
+    "Total interest calculations",
+    "Down payment percentage calculator"
+  ]
+}
+
 export const metadata: Metadata = {
   title: 'Mortgage Calculator - Calculate Monthly Payments by Credit Score | Financial Calc',
   description: 'Free mortgage calculator with credit score-based interest rates. Calculate monthly payments, total interest, and compare 15, 20, 25, and 30-year mortgage terms. Get instant accurate results.',
@@ -44,5 +66,14 @@ export default function MortgageLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      {/* JSON-LD rendered server-side so Googlebot sees it in raw HTML */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      {children}
+    </>
+  )
 }

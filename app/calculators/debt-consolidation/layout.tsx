@@ -1,5 +1,27 @@
 import type { Metadata } from 'next'
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Debt Consolidation Calculator",
+  "description": "Calculate debt consolidation savings with personalized rates based on your credit score. Compare before and after scenarios.",
+  "url": "https://financial-calc.com/calculators/debt-consolidation",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Credit score-based consolidation loan rates",
+    "Before and after payment comparison",
+    "Total interest savings calculator",
+    "Multiple debt entry support",
+    "Debt payoff timeline visualization"
+  ]
+}
+
 export const metadata: Metadata = {
   title: 'Debt Consolidation Calculator - Compare Loan Options',
   description: 'Calculate debt consolidation savings with our comprehensive calculator. Compare interest rates, monthly payments, and total costs. Get personalized consolidation loan rates based on your credit score.',
@@ -36,5 +58,14 @@ export default function DebtConsolidationLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      {/* JSON-LD rendered server-side so Googlebot sees it in raw HTML */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      {children}
+    </>
+  )
 }

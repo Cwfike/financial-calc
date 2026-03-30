@@ -119,45 +119,24 @@ export default function MortgageCalculator() {
   const creditRange = getCreditRangeInfo(parseInt(creditScore))
   const downPaymentPercent = ((parseFormattedNumber(downPayment) / parseFormattedNumber(homePrice)) * 100).toFixed(1)
 
-  // Structured data for SEO
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Mortgage Calculator",
-    "description": "Calculate monthly mortgage payments with credit score-based interest rates for 15, 20, 25, and 30-year terms",
-    "url": "https://financial-calc.com/calculators/mortgage",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "featureList": [
-      "Credit score-based interest rates",
-      "Multiple loan term options (15, 20, 25, 30 years)", 
-      "Real-time payment calculations",
-      "Total interest calculations",
-      "Down payment percentage calculator"
-    ]
-  }
-
-  useEffect(() => {
-    // Add structured data to page
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.text = JSON.stringify(structuredData)
-    document.head.appendChild(script)
-
-    return () => {
-      document.head.removeChild(script)
-    }
-  }, [])
+  // Note: JSON-LD structured data is now rendered server-side in layout.tsx
+  // so Googlebot sees it in the raw HTML without needing JavaScript execution.
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        {/* Page Header — H1 required for SEO; must be in server-rendered HTML */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Mortgage Calculator
+          </h1>
+          <p className="text-gray-600">
+            Calculate your monthly mortgage payment with interest rates personalized to your credit score.
+          </p>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Calculator Form */}
           <div className="bg-white rounded-lg shadow-lg p-8">

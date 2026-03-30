@@ -127,46 +127,24 @@ export default function AutoLoanCalculator() {
   const downPaymentPercent = ((parseFormattedNumber(downPayment) / parseFormattedNumber(vehiclePrice)) * 100).toFixed(1)
   const totalDownPayment = parseFormattedNumber(downPayment) + parseFormattedNumber(tradeInValue)
 
-  // Structured data for SEO
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Auto Loan Calculator",
-    "description": "Calculate monthly auto loan payments with credit score-based interest rates for new and used vehicles",
-    "url": "https://financial-calc.com/calculators/auto-loan",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "featureList": [
-      "Credit score-based interest rates",
-      "New and used vehicle rate options",
-      "Trade-in value calculator",
-      "Multiple loan term options (2-7 years)",
-      "Real-time payment calculations",
-      "Down payment percentage calculator"
-    ]
-  }
-
-  useEffect(() => {
-    // Add structured data to page
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.text = JSON.stringify(structuredData)
-    document.head.appendChild(script)
-
-    return () => {
-      document.head.removeChild(script)
-    }
-  }, [])
+  // Note: JSON-LD structured data is now rendered server-side in layout.tsx
+  // so Googlebot sees it in the raw HTML without needing JavaScript execution.
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100">
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        {/* Page Header — H1 required for SEO; must be in server-rendered HTML */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Auto Loan Calculator
+          </h1>
+          <p className="text-gray-600">
+            Calculate your car payment with interest rates adjusted for your credit score — for new and used vehicles.
+          </p>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Calculator Form */}
           <div className="bg-white rounded-lg shadow-lg p-8">

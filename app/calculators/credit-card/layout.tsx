@@ -1,5 +1,27 @@
 import type { Metadata } from 'next'
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Credit Card Payoff Calculator",
+  "description": "Calculate how long it takes to pay off credit card debt and total interest costs. Compare minimum vs fixed payment strategies.",
+  "url": "https://financial-calc.com/calculators/credit-card",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Credit card payoff timeline calculator",
+    "Minimum payment vs fixed payment comparison",
+    "Total interest cost breakdown",
+    "Monthly interest calculations",
+    "Debt elimination strategy tool"
+  ]
+}
+
 export const metadata: Metadata = {
   title: 'Credit Card Payoff Calculator - Calculate Debt Payoff Time & Interest | Financial Calc',
   description: 'Free credit card payoff calculator. Calculate how long it takes to pay off credit card debt, total interest costs, and compare minimum vs fixed payment strategies.',
@@ -44,5 +66,14 @@ export default function CreditCardLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      {/* JSON-LD rendered server-side so Googlebot sees it in raw HTML */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      {children}
+    </>
+  )
 }

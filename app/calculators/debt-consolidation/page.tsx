@@ -754,41 +754,8 @@ export default function DebtConsolidationCalculator() {
     }
   }
 
-  // Structured data for SEO
-  const structuredData = useMemo(() => ({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Debt Consolidation Calculator",
-    "description": "Calculate debt consolidation savings with personalized interest rates based on credit score. Compare before and after scenarios to find the best consolidation loan option.",
-    "url": "https://financial-calc.com/calculators/debt-consolidation",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "featureList": [
-      "Multiple debt consolidation analysis",
-      "Credit score-based rate estimation", 
-      "Before and after payment comparison",
-      "Interactive charts and visualizations",
-      "Origination fee calculations",
-      "Personalized loan recommendations",
-      "Total interest and cost savings calculation"
-    ]
-  }), [])
-
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.text = JSON.stringify(structuredData)
-    document.head.appendChild(script)
-
-    return () => {
-      document.head.removeChild(script)
-    }
-  }, [structuredData])
+  // Note: JSON-LD structured data is now rendered server-side in layout.tsx
+  // so Googlebot sees it in the raw HTML without needing JavaScript execution.
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">

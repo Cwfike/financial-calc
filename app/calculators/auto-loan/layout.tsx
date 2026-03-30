@@ -1,48 +1,80 @@
 import type { Metadata } from 'next'
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Auto Loan Calculator",
+  "description": "Calculate monthly auto loan payments with credit score-based interest rates for new and used vehicles",
+  "url": "https://financial-calc.com/calculators/auto-loan",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "Credit score-based interest rates",
+    "New and used vehicle rate options",
+    "Trade-in value calculator",
+    "Multiple loan term options (2-7 years)",
+    "Real-time payment calculations",
+    "Down payment percentage calculator"
+  ]
+}
+
 export const metadata: Metadata = {
-  title: 'Mortgage Calculator - Calculate Monthly Payments by Credit Score | Financial Calc',
-  description: 'Free mortgage calculator with credit score-based interest rates. Calculate monthly payments, total interest, and compare 15, 20, 25, and 30-year mortgage terms. Get instant accurate results.',
+  title: 'Auto Loan Calculator - Calculate Car Payments by Credit Score | Financial Calc',
+  description: 'Free auto loan calculator with credit score-based interest rates. Calculate monthly car payments for new and used vehicles. Compare loan terms and see total interest costs.',
   keywords: [
-    'mortgage calculator',
-    'home loan calculator',
-    'mortgage payment calculator',
-    'mortgage rates by credit score',
-    'monthly mortgage payment',
-    'home financing calculator',
-    'mortgage interest calculator',
-    '15 year mortgage',
-    '30 year mortgage',
-    'down payment calculator'
+    'auto loan calculator',
+    'car payment calculator',
+    'auto loan payment calculator',
+    'car loan calculator by credit score',
+    'monthly car payment',
+    'auto financing calculator',
+    'car interest rate calculator',
+    'used car loan calculator',
+    'new car loan calculator',
+    'vehicle payment calculator'
   ],
   openGraph: {
-    title: 'Mortgage Calculator - Calculate Monthly Payments by Credit Score',
-    description: 'Calculate monthly mortgage payments with credit-based interest rates. Compare loan terms and see total interest costs.',
-    url: 'https://financial-calc.com/calculators/mortgage',
+    title: 'Auto Loan Calculator - Calculate Car Payments by Credit Score',
+    description: 'Calculate monthly auto loan payments with credit-based interest rates. Compare new vs used vehicle rates and loan terms.',
+    url: 'https://financial-calc.com/calculators/auto-loan',
     images: [
       {
-        url: '/og-mortgage.png',
+        url: '/og-auto-loan.png',
         width: 1200,
         height: 630,
-        alt: 'Mortgage Calculator - Calculate Home Loan Payments',
+        alt: 'Auto Loan Calculator - Calculate Car Loan Payments',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mortgage Calculator - Home Loan Payment Calculator',
-    description: 'Calculate mortgage payments with credit-based rates. Free home loan calculator with multiple term options.',
-    images: ['/og-mortgage.png'],
+    title: 'Auto Loan Calculator - Car Payment Calculator',
+    description: 'Calculate auto loan payments with credit-based rates. Free car loan calculator with new and used vehicle options.',
+    images: ['/og-auto-loan.png'],
   },
   alternates: {
-    canonical: 'https://financial-calc.com/calculators/mortgage',
+    canonical: 'https://financial-calc.com/calculators/auto-loan',
   },
 }
 
-export default function MortgageLayout({
+export default function AutoLoanLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      {/* JSON-LD rendered server-side so Googlebot sees it in raw HTML */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      {children}
+    </>
+  )
 }
