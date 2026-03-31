@@ -3,15 +3,21 @@ import { Calculator, Home, Car, ArrowLeft } from "lucide-react"
 
 // Import all blog post meta
 import { meta as creditScoreMeta } from "./credit-score-mortgage-rate/meta"
+import { meta as retirementMeta } from "./credit-score-retirement/meta"
 
 const posts = [
   {
+    slug: "credit-score-retirement",
+    meta: retirementMeta,
+    date: "2026-03-31",
+    readingTime: "7 minutes",
+  },
+  {
     slug: "credit-score-mortgage-rate",
     meta: creditScoreMeta,
-    date: "2024-12-20",
+    date: "2025-09-07",
     readingTime: "6 minutes",
   },
-  // Add more posts here in the same format
 ]
 
 export default function BlogIndex() {
