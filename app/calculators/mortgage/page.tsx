@@ -369,7 +369,7 @@ export default function MortgageCalculator() {
         {/* Related Calculators — internal linking for SEO */}
         <section className="mt-8 bg-white rounded-lg shadow-lg p-8" aria-label="Related calculators">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Related Calculators</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link href="/calculators/auto-loan" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
               <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Auto Loan Calculator</div>
               <div className="text-sm text-gray-500">Calculate car payments based on your credit score</div>
@@ -381,6 +381,10 @@ export default function MortgageCalculator() {
             <Link href="/calculators/debt-consolidation" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
               <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Debt Consolidation Calculator</div>
               <div className="text-sm text-gray-500">Compare consolidation loan savings vs. current debt</div>
+            </Link>
+            <Link href="/calculators/retirement" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
+              <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Retirement Calculator</div>
+              <div className="text-sm text-gray-500">Project your savings and estimated monthly income</div>
             </Link>
           </div>
         </section>

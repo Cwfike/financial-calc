@@ -111,6 +111,27 @@ const calculateDebtPayoff = (balance: number, rate: number, payment: number): { 
   return { months, totalInterest }
 }
 
+// Solve for the effective monthly rate (then annualize to APR) where the
+// present value of the payment stream equals the cash the borrower actually
+// receives. Financed fees make the true APR higher than the note rate.
+const solveAPR = (amountReceived: number, payment: number, months: number): number => {
+  if (amountReceived <= 0 || payment <= 0 || months <= 0) return 0
+
+  const pvAtRate = (i: number): number =>
+    i === 0 ? payment * months : payment * (1 - Math.pow(1 + i, -months)) / i
+
+  // Bisection on the monthly rate. Payment always exceeds amountReceived/months
+  // here, so a positive rate exists within [0, 1].
+  let lo = 0
+  let hi = 1
+  for (let k = 0; k < 100; k++) {
+    const mid = (lo + hi) / 2
+    if (pvAtRate(mid) > amountReceived) lo = mid
+    else hi = mid
+  }
+  return ((lo + hi) / 2) * 12 * 100
+}
+
 const calculateConsolidation = (
   debts: Debt[],
   creditScore: string,
@@ -155,8 +176,10 @@ const calculateConsolidation = (
   const consolidatedTotalCost = consolidatedPayment * loanTerm
   const consolidatedInterest = consolidatedTotalCost - totalBalance
   
-  // Calculate APR including fees
-  const apr = ((consolidatedTotalCost / totalBalance) ** (1/loanTerm*12) - 1) * 12 * 100
+  // Calculate effective APR including financed origination fees. The borrower
+  // receives totalBalance (used to pay off existing debts) but repays a loan
+  // grown by the fee, so the effective APR exceeds the note rate.
+  const apr = solveAPR(totalBalance, consolidatedPayment, loanTerm)
   
   return {
     currentScenario: {
@@ -510,7 +533,7 @@ const ComparisonCharts = ({ result }: { result: CalculationResult | null }) => {
   )
 }
 
-const ResultsDisplay = ({ result }: { result: CalculationResult | null }) => {
+const ResultsDisplay = ({ result, creditScore }: { result: CalculationResult | null; creditScore: string }) => {
   if (!result) {
     return (
       <div className="bg-white rounded-lg shadow-lg p-8">
@@ -642,7 +665,7 @@ const ResultsDisplay = ({ result }: { result: CalculationResult | null }) => {
         <h4 className="font-medium text-gray-800 mb-2">💡 Our Recommendation</h4>
         <p className="text-sm text-gray-700">
           {savings.totalInterest > 0 
-            ? `Debt consolidation could save you ${formatCurrency(savings.totalInterest)} in interest and reduce your monthly payment by ${formatCurrency(Math.abs(savings.monthlyPayment))}. Consider applying for a personal loan with rates between ${getCreditScoreRates(result.currentScenario.totalBalance.toString()).min}%-${getCreditScoreRates(result.currentScenario.totalBalance.toString()).max}%.`
+            ? `Debt consolidation could save you ${formatCurrency(savings.totalInterest)} in interest and reduce your monthly payment by ${formatCurrency(Math.abs(savings.monthlyPayment))}. Consider applying for a personal loan with rates between ${getCreditScoreRates(creditScore).min}%-${getCreditScoreRates(creditScore).max}%.`
             : `While consolidation would extend your payoff time, it could lower your monthly payment by ${formatCurrency(Math.abs(savings.monthlyPayment))}. Consider whether the monthly payment relief is worth the additional interest cost of ${formatCurrency(Math.abs(savings.totalInterest))}.`
           }
         </p>
@@ -792,7 +815,7 @@ export default function DebtConsolidationCalculator() {
 
           {/* Right Column - Results */}
           <div className="lg:col-span-2 space-y-8">
-            <ResultsDisplay result={result} />
+            <ResultsDisplay result={result} creditScore={creditScore} />
 
             {/* Charts Toggle */}
             {result && (
@@ -861,7 +884,7 @@ export default function DebtConsolidationCalculator() {
         {/* Related Calculators — internal linking for SEO */}
         <section className="mt-8 bg-white rounded-lg shadow-lg p-8" aria-label="Related calculators">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Related Calculators</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link href="/calculators/mortgage" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
               <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Mortgage Calculator</div>
               <div className="text-sm text-gray-500">Calculate home loan payments based on your credit score</div>
@@ -873,6 +896,10 @@ export default function DebtConsolidationCalculator() {
             <Link href="/calculators/credit-card" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
               <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Credit Card Payoff Calculator</div>
               <div className="text-sm text-gray-500">See how long to pay off your credit card balance</div>
+            </Link>
+            <Link href="/calculators/retirement" className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition-all group">
+              <div className="font-medium text-gray-900 group-hover:text-blue-600 mb-1">Retirement Calculator</div>
+              <div className="text-sm text-gray-500">Project your savings and estimated monthly income</div>
             </Link>
           </div>
         </section>

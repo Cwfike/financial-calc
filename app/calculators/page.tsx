@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen, PieChart } from 'lucide-react'
+import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen, PieChart, PiggyBank } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -64,6 +64,14 @@ export default function CalculatorsPage() {
         "name": "Debt Consolidation Calculator",
         "description": "Calculate debt consolidation savings with personalized rates and payment comparisons",
         "url": "https://financial-calc.com/calculators/debt-consolidation",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Retirement Calculator",
+        "description": "Project retirement savings and estimated monthly income based on contributions and expected returns",
+        "url": "https://financial-calc.com/calculators/retirement",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web Browser"
       }
@@ -207,6 +215,35 @@ export default function CalculatorsPage() {
 
                   <div className="flex items-center text-purple-600 group-hover:text-purple-800 transition-colors">
                     <span className="font-medium">Calculate Savings</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
+
+            {/* Retirement Calculator Card */}
+            <article>
+              <Link href="/calculators/retirement" className="group block h-full">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-8 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    <PiggyBank className="h-8 w-8 text-violet-600" aria-hidden="true" />
+                    <h2 className="ml-3 text-2xl font-semibold text-gray-900">Retirement Calculator</h2>
+                  </div>
+                  <p className="text-gray-600 mb-6 flex-grow">
+                    Project your retirement savings and estimated monthly income based on your contributions and expected returns.
+                    See how reducing high-interest debt could grow your nest egg.
+                  </p>
+
+                  {/* Features List */}
+                  <ul className="text-sm text-gray-500 mb-6 space-y-1">
+                    <li>✓ Compound growth projection</li>
+                    <li>✓ 4% rule income estimate</li>
+                    <li>✓ Contribution vs. growth breakdown</li>
+                    <li>✓ Debt-to-retirement impact</li>
+                  </ul>
+
+                  <div className="flex items-center text-violet-600 group-hover:text-violet-800 transition-colors">
+                    <span className="font-medium">Project My Retirement</span>
                     <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
                   </div>
                 </div>

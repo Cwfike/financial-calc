@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen, PieChart } from 'lucide-react'
+import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen, PieChart, PiggyBank } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -108,6 +108,19 @@ export default function HomePage() {
           "price": "0",
           "priceCurrency": "USD"
         }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Retirement Calculator",
+        "description": "Project retirement savings and estimated monthly income based on contributions and expected returns",
+        "url": "https://financial-calc.com/calculators/retirement",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
       }
     ]
   }
@@ -133,7 +146,7 @@ export default function HomePage() {
           </div>
 
           {/* Calculator Cards */}
-          <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {/* Mortgage Calculator Card */}
             <article>
               <Link href="/calculators/mortgage" className="group block">
@@ -205,6 +218,25 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center text-purple-600 group-hover:text-purple-800 transition-colors">
                     <span className="font-medium">Calculate Savings</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
+
+            {/* Retirement Calculator Card */}
+            <article>
+              <Link href="/calculators/retirement" className="group block">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8">
+                  <div className="flex items-center mb-4">
+                    <PiggyBank className="h-8 w-8 text-violet-600" aria-hidden="true" />
+                    <h3 className="ml-3 text-2xl font-semibold text-gray-900">Retirement Calculator</h3>
+                  </div>
+                  <p className="text-gray-600 mb-6">
+                    Project your retirement savings and estimated monthly income, and see how reducing high-interest debt could grow your nest egg.
+                  </p>
+                  <div className="flex items-center text-violet-600 group-hover:text-violet-800 transition-colors">
+                    <span className="font-medium">Project My Retirement</span>
                     <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
                   </div>
                 </div>
