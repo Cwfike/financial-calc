@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen, PieChart, PiggyBank } from 'lucide-react'
+import { Calculator, Car, CreditCard, Home, TrendingUp, BookOpen, PieChart, PiggyBank, LineChart } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -114,6 +114,19 @@ export default function HomePage() {
         "name": "Retirement Calculator",
         "description": "Project retirement savings and estimated monthly income based on contributions and expected returns",
         "url": "https://financial-calc.com/calculators/retirement",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Compound Interest Calculator",
+        "description": "Calculate how investments grow over time with compound interest and monthly contributions",
+        "url": "https://financial-calc.com/calculators/compound-interest",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web Browser",
         "offers": {
@@ -237,6 +250,25 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center text-violet-600 group-hover:text-violet-800 transition-colors">
                     <span className="font-medium">Project My Retirement</span>
+                    <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </article>
+
+            {/* Compound Interest Calculator Card */}
+            <article>
+              <Link href="/calculators/compound-interest" className="group block">
+                <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-8">
+                  <div className="flex items-center mb-4">
+                    <LineChart className="h-8 w-8 text-teal-600" aria-hidden="true" />
+                    <h3 className="ml-3 text-2xl font-semibold text-gray-900">Compound Interest</h3>
+                  </div>
+                  <p className="text-gray-600 mb-6">
+                    See how your savings and investments grow over time with compound interest and regular monthly contributions.
+                  </p>
+                  <div className="flex items-center text-teal-600 group-hover:text-teal-800 transition-colors">
+                    <span className="font-medium">Calculate Investment Growth</span>
                     <TrendingUp className="ml-2 h-5 w-5" aria-hidden="true" />
                   </div>
                 </div>

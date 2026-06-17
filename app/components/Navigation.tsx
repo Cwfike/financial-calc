@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Calculator, Home, Car, CreditCard, ChevronDown, Menu, X, PieChart, PiggyBank } from 'lucide-react'
+import { Calculator, Home, Car, CreditCard, ChevronDown, Menu, X, PieChart, PiggyBank, LineChart } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
 export default function Navigation() {
@@ -46,6 +46,13 @@ export default function Navigation() {
       description: 'Project savings & monthly income',
       icon: PiggyBank,
       color: 'text-violet-600'
+    },
+    {
+      href: '/calculators/compound-interest',
+      name: 'Compound Interest Calculator',
+      description: 'See how investments grow over time',
+      icon: LineChart,
+      color: 'text-teal-600'
     }
   ]
 
