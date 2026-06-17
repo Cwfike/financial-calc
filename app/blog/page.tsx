@@ -4,8 +4,15 @@ import { Calculator, Home, Car, ArrowLeft } from "lucide-react"
 // Import all blog post meta
 import { meta as creditScoreMeta } from "./credit-score-mortgage-rate/meta"
 import { meta as retirementMeta } from "./credit-score-retirement/meta"
+import { meta as minimumPaymentMeta } from "./minimum-payment-trap/meta"
 
 const posts = [
+  {
+    slug: "minimum-payment-trap",
+    meta: minimumPaymentMeta,
+    date: "2026-06-16",
+    readingTime: "7 minutes",
+  },
   {
     slug: "credit-score-retirement",
     meta: retirementMeta,
